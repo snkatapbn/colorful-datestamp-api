@@ -13,21 +13,26 @@ paths:
   /formats:
     get:
       operationId: getDateFormats
-      summary: Get frontend and backend date format tokens
+      summary: Get frontend and backend date formats
       responses:
         '200':
-          description: Returns the frontend and backend date formats
+          description: Mocked response from static JSON
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  frontendFormat:
-                    type: string
-                    example: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
-                  backendFormat:
-                    type: string
-                    example: "YYYY-MM-DDTHH:mm:ss+08:00"
+                $ref: '#/components/schemas/DateFormats'
+components:
+  schemas:
+    DateFormats:
+      type: object
+      properties:
+        frontendFormat:
+          type: string
+        backendFormat:
+          type: string
+      example:
+        frontendFormat: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+        backendFormat: "YYYY-MM-DDTHH:mm:ss+08:00"
 
   /token:
     get:
@@ -104,3 +109,4 @@ paths:
                       - ISO/IEC 27001
                       - ISO/IEC 27701
                       - ISO/IEC 27018
+
