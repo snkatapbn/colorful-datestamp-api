@@ -2,119 +2,206 @@ openapi: 3.1.0
 info:
   title: Brunei Datestamp and ICT Compliance API
   description: >
-    Provides regulatory, ISO standards, and datestamp formatting metadata 
-    for mobile app development and government ICT compliance in Brunei Darussalam.
-  version: 1.0.0
+    Static JSON endpoints hosted on GitHub Pages providing Brunei datestamp token and
+    official frontend/backend date format strings (including the colorful @datestamp prefix).
+  version: 1.0.3
+
 servers:
   - url: https://snkatapbn.github.io/colorful-datestamp-api
-    description: GitHub Pages static mock server
+    description: GitHub Pages static server
 
 paths:
   /formats.json:
     get:
       operationId: getDateFormats
-      summary: Get frontend and backend date formats (static)
+      summary: Get frontend and backend date formats (colorful + official)
       responses:
-        '200':
-          description: Static JSON with format info
+        "200":
+          description: Date format configuration
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  frontendFormat:
-                    type: string
-                    example: "dd-MM-yyyy"
-                  backendFormat:
-                    type: string
-                    example: "yyyy-MM-dd"
+                $ref: "#/components/schemas/DateFormats"
+              example:
+                frontendFormat: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+                backendFormat: "YYYY-MM-DDTHH:mm:ss+08:00"
+
+  /token.json:
+    get:
+      operationId: getGlobalToken
+      summary: Get the global datestamp token
+      responses:
+        "200":
+          description: Datestamp token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+              example:
+                token: "@datestamp"
+
 components:
   schemas:
     DateFormats:
       type: object
+      additionalProperties: false
+      required: [frontendFormat, backendFormat]
       properties:
         frontendFormat:
           type: string
+          description: >
+            Frontend/UI datestamp prefix + human-readable Brunei time format.
+            Returned as a format string (not a rendered date).
+          example: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
         backendFormat:
           type: string
-      example:
-        frontendFormat: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
-        backendFormat: "YYYY-MM-DDTHH:mm:ss+08:00"
+          description: Backend/system exchange timestamp format string (UTC+08:00)
+          example: "YYYY-MM-DDTHH:mm:ss+08:00"
 
-  /token:
+    Token:
+      type: object
+      additionalProperties: false
+      required: [token]
+      properties:
+        token:
+          type: string
+          description: Global response token
+          example: "@datestamp"
+openapi: 3.1.0
+info:
+  title: Brunei Datestamp and ICT Compliance API
+  description: >
+    Static JSON endpoints hosted on GitHub Pages providing Brunei datestamp token and
+    official frontend/backend date format strings (including the colorful @datestamp prefix).
+  version: 1.0.3
+
+servers:
+  - url: https://snkatapbn.github.io/colorful-datestamp-api
+    description: GitHub Pages static server
+
+paths:
+  /formats.json:
+    get:
+      operationId: getDateFormats
+      summary: Get frontend and backend date formats (colorful + official)
+      responses:
+        "200":
+          description: Date format configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DateFormats"
+              example:
+                frontendFormat: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+                backendFormat: "YYYY-MM-DDTHH:mm:ss+08:00"
+
+  /token.json:
     get:
       operationId: getGlobalToken
-      summary: Get the global datestamp token used in UI
+      summary: Get the global datestamp token
       responses:
-        '200':
-          description: Returns the response token string
+        "200":
+          description: Datestamp token
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    example: "@datestamp"
+                $ref: "#/components/schemas/Token"
+              example:
+                token: "@datestamp"
 
-  /regulator:
+components:
+  schemas:
+    DateFormats:
+      type: object
+      additionalProperties: false
+      required: [frontendFormat, backendFormat]
+      properties:
+        frontendFormat:
+          type: string
+          description: >
+            Frontend/UI datestamp prefix + human-readable Brunei time format.
+            Returned as a format string (not a rendered date).
+          example: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+        backendFormat:
+          type: string
+          description: Backend/system exchange timestamp format string (UTC+08:00)
+          example: "YYYY-MM-DDTHH:mm:ss+08:00"
+
+    Token:
+      type: object
+      additionalProperties: false
+      required: [token]
+      properties:
+        token:
+          type: string
+          description: Global response token
+          example: "@datestamp"
+openapi: 3.1.0
+info:
+  title: Brunei Datestamp and ICT Compliance API
+  description: >
+    Static JSON endpoints hosted on GitHub Pages providing Brunei datestamp token and
+    official frontend/backend date format strings (including the colorful @datestamp prefix).
+  version: 1.0.3
+
+servers:
+  - url: https://snkatapbn.github.io/colorful-datestamp-api
+    description: GitHub Pages static server
+
+paths:
+  /formats.json:
     get:
-      operationId: getRegulatorInfo
-      summary: Get information about Brunei’s ICT regulator (AITI)
+      operationId: getDateFormats
+      summary: Get frontend and backend date formats (colorful + official)
       responses:
-        '200':
-          description: National regulator info
+        "200":
+          description: Date format configuration
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    example: Authority for Info-communications Technology Industry
-                  acronym:
-                    type: string
-                    example: AITI
-                  jurisdiction:
-                    type: string
-                    example: Negara Brunei Darussalam
-                  applicability:
-                    type: array
-                    items:
-                      type: string
-                    example:
-                      - Mobile applications
-                      - Digital government services
-                      - ICT systems and platforms
-                      - Data protection and cybersecurity
+                $ref: "#/components/schemas/DateFormats"
+              example:
+                frontendFormat: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+                backendFormat: "YYYY-MM-DDTHH:mm:ss+08:00"
 
-  /compliance/mobile:
+  /token.json:
     get:
-      operationId: getMobileComplianceStandards
-      summary: Get ISO standards for mobile development & privacy
+      operationId: getGlobalToken
+      summary: Get the global datestamp token
       responses:
-        '200':
-          description: Lists mandatory ISO/IEC standards
+        "200":
+          description: Datestamp token
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  development:
-                    type: array
-                    items:
-                      type: string
-                    example:
-                      - ISO/IEC 12207
-                      - ISO/IEC 25010
-                      - ISO/IEC 27034
-                  privacy:
-                    type: array
-                    items:
-                      type: string
-                    example:
-                      - ISO/IEC 27001
-                      - ISO/IEC 27701
-                      - ISO/IEC 27018
+                $ref: "#/components/schemas/Token"
+              example:
+                token: "@datestamp"
 
+components:
+  schemas:
+    DateFormats:
+      type: object
+      additionalProperties: false
+      required: [frontendFormat, backendFormat]
+      properties:
+        frontendFormat:
+          type: string
+          description: >
+            Frontend/UI datestamp prefix + human-readable Brunei time format.
+            Returned as a format string (not a rendered date).
+          example: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+        backendFormat:
+          type: string
+          description: Backend/system exchange timestamp format string (UTC+08:00)
+          example: "YYYY-MM-DDTHH:mm:ss+08:00"
 
+    Token:
+      type: object
+      additionalProperties: false
+      required: [token]
+      properties:
+        token:
+          type: string
+          description: Global response token
+          example: "@datestamp"
