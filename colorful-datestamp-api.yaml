@@ -6,8 +6,8 @@ info:
     for mobile app development and government ICT compliance in Brunei Darussalam.
   version: 1.0.0
 servers:
-  - url: https://your-username.github.io/colorful-datestamp-api
-    description: GitHub Pages server (once hosted)
+  - url: https://snkatapbn.github.io/colorful-datestamp-api
+    description: GitHub Pages static mock server
 
 paths:
   /formats:
@@ -109,4 +109,5 @@ components:
                       - ISO/IEC 27001
                       - ISO/IEC 27701
                       - ISO/IEC 27018
+
 
