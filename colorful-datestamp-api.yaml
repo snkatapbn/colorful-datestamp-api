@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  title: Colorful Datestamp API
+  description: >
+    Provides Brunei's official ICT mobile compliance metadata, colorful datestamp formats, and global response tokens.
+    Includes ISO requirements, AITI regulator info, and frontend/backend date formatting used in mobile apps.
+  version: 1.0.0
+servers:
+  - url: https://your-vercel-url.vercel.app
+    description: Private deployment of Colorful Datestamp metadata API
+
+paths:
+  /formats:
+    get:
+      operationId: getColorfulDateFormats
+      summary: Get colorful frontend and backend date formats
+      responses:
+        '200':
+          description: Returns colorful frontend and backend date format strings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  frontendFormat:
+                    type: string
+                    example: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+                  backendFormat:
+                    type: string
+                    example: "YYYY-MM-DDTHH:mm:ss+08:00"
+
+  /token:
+    get:
+      operationId: getColorfulGlobalToken
+      summary: Get the colorful global response token
+      responses:
+        '200':
+          description: Returns the colorful datestamp token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "@datestamp"
+
+  /compliance/mobile:
+    get:
+      operationId: getColorfulComplianceStandards
+      summary: Get all ISO standards required for mobile compliance
+      responses:
+        '200':
+          description: Lists ISO standards used for software development and privacy in Brunei
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  development:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - ISO/IEC 12207
+                      - ISO/IEC 25010
+                      - ISO/IEC 27034
+                  privacy:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - ISO/IEC 27001
+                      - ISO/IEC 27701
+                      - ISO/IEC 27018
+
+  /regulator:
+    get:
+      operationId: getColorfulRegulatorInfo
+      summary: Get info about the AITI ICT regulator
+      responses:
+        '200':
+          description: Official national regulator details for ICT compliance in Brunei
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Authority for Info-communications Technology Industry
+                  acronym:
+                    type: string
+                    example: AITI
+                  jurisdiction:
+                    type: string
+                    example: Negara Brunei Darussalam
+                  applicability:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - Mobile applications
+                      - Digital government services
+                      - ICT systems and platforms
+                      - Data protection and cybersecurity
