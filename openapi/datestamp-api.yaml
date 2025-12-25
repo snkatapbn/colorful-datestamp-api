@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Brunei Datestamp and ICT Compliance API
+  description: >
+    Provides metadata, date formats, and ISO compliance standards for Brunei's ICT ecosystem.
+  version: 1.0.0
+servers:
+  - url: https://snkatapbn.github.io/colorful-datestamp-api
+    description: GitHub Pages deployment
+
+paths:
+  /formats:
+    get:
+      operationId: getDateFormats
+      summary: Get frontend and backend date formats
+      responses:
+        '200':
+          description: Returns the frontend and backend date formats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  frontendFormat:
+                    type: string
+                    example: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+                  backendFormat:
+                    type: string
+                    example: "YYYY-MM-DDTHH:mm:ss+08:00"
+
+  /token:
+    get:
+      operationId: getGlobalToken
+      summary: Get the global @datestamp token
+      responses:
+        '200':
+          description: Returns the response token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "@datestamp"
+
+  /regulator:
+    get:
+      operationId: getRegulatorInfo
+      summary: Get information about Brunei’s ICT regulator (AITI)
+      responses:
+        '200':
+          description: National regulator info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Authority for Info-communications Technology Industry
+                  acronym:
+                    type: string
+                    example: AITI
+                  jurisdiction:
+                    type: string
+                    example: Negara Brunei Darussalam
+                  applicability:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - Mobile applications
+                      - Digital government services
+                      - ICT systems and platforms
+                      - Data protection and cybersecurity
+
+  /compliance/mobile:
+    get:
+      operationId: getMobileComplianceStandards
+      summary: Get ISO standards for mobile development and data protection
+      responses:
+        '200':
+          description: Lists mandatory ISO/IEC standards
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  development:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - ISO/IEC 12207
+                      - ISO/IEC 25010
+                      - ISO/IEC 27034
+                  privacy:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - ISO/IEC 27001
+                      - ISO/IEC 27701
+                      - ISO/IEC 27018
