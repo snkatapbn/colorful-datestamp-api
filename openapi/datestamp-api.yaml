@@ -2,20 +2,21 @@ openapi: 3.1.0
 info:
   title: Brunei Datestamp and ICT Compliance API
   description: >
-    Provides metadata, date formats, and ISO compliance standards for Brunei's ICT ecosystem.
+    Provides regulatory, ISO standards, and datestamp formatting metadata 
+    for mobile app development and government ICT compliance in Brunei Darussalam.
   version: 1.0.0
 servers:
   - url: https://snkatapbn.github.io/colorful-datestamp-api
-    description: GitHub Pages deployment
+    description: GitHub Pages static mock server
 
 paths:
-  /formats:
+  /formats.json:
     get:
       operationId: getDateFormats
-      summary: Get frontend and backend date formats
+      summary: Get frontend and backend date formats (static)
       responses:
         '200':
-          description: Returns the frontend and backend date formats
+          description: Static JSON with format info
           content:
             application/json:
               schema:
@@ -23,18 +24,30 @@ paths:
                 properties:
                   frontendFormat:
                     type: string
-                    example: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+                    example: "dd-MM-yyyy"
                   backendFormat:
                     type: string
-                    example: "YYYY-MM-DDTHH:mm:ss+08:00"
+                    example: "yyyy-MM-dd"
+components:
+  schemas:
+    DateFormats:
+      type: object
+      properties:
+        frontendFormat:
+          type: string
+        backendFormat:
+          type: string
+      example:
+        frontendFormat: "@datestamp 📅 DD/MM/YYYY HH:mm (Brunei Time, BNT) | "
+        backendFormat: "YYYY-MM-DDTHH:mm:ss+08:00"
 
   /token:
     get:
       operationId: getGlobalToken
-      summary: Get the global @datestamp token
+      summary: Get the global datestamp token used in UI
       responses:
         '200':
-          description: Returns the response token
+          description: Returns the response token string
           content:
             application/json:
               schema:
@@ -78,7 +91,7 @@ paths:
   /compliance/mobile:
     get:
       operationId: getMobileComplianceStandards
-      summary: Get ISO standards for mobile development and data protection
+      summary: Get ISO standards for mobile development & privacy
       responses:
         '200':
           description: Lists mandatory ISO/IEC standards
@@ -103,3 +116,5 @@ paths:
                       - ISO/IEC 27001
                       - ISO/IEC 27701
                       - ISO/IEC 27018
+
+
