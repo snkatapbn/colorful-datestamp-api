@@ -10,17 +10,24 @@ servers:
     description: GitHub Pages static mock server
 
 paths:
-  /formats:
+  /formats.json:
     get:
       operationId: getDateFormats
-      summary: Get frontend and backend date formats
+      summary: Get frontend and backend date formats (static)
       responses:
         '200':
-          description: Mocked response from static JSON
+          description: Static JSON with format info
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DateFormats'
+                type: object
+                properties:
+                  frontendFormat:
+                    type: string
+                    example: "dd-MM-yyyy"
+                  backendFormat:
+                    type: string
+                    example: "yyyy-MM-dd"
 components:
   schemas:
     DateFormats:
@@ -109,5 +116,6 @@ components:
                       - ISO/IEC 27001
                       - ISO/IEC 27701
                       - ISO/IEC 27018
+
 
 
